@@ -1,0 +1,150 @@
+/* ========================================
+   Layout - Main Application Structure
+   ======================================== */
+
+/* 顶部菜单栏 */
+.menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--menu-bar-height);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 var(--space-md);
+    z-index: var(--z-menu);
+    position: relative;
+}
+
+.menu-bar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.menu-bar-center {
+    display: flex;
+    align-items: center;
+}
+
+.menu-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    cursor: default;
+}
+
+.app-logo span {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.menu-items {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.menu-btn {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-md);
+    transition: all var(--transition-fast);
+}
+
+.menu-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.menu-btn.active {
+    background: var(--bg-active);
+    color: var(--text-accent);
+}
+
+/* 变换模式按钮组 */
+.transform-mode-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--bg-primary);
+    padding: 2px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.mode-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.mode-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    box-shadow: var(--shadow-glow);
+}
+
+.status-text {
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}
+
+/* 主体布局 */
+.main-layout {
+    display: flex;
+    height: calc(100vh - var(--menu-bar-height) - var(--status-bar-height));
+    overflow: hidden;
+}
+
+/* 底部状态栏 */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--status-bar-height);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 0 var(--space-lg);
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    z-index: var(--z-toolbar);
+}
+
+.status-bar-left,
+.status-bar-center,
+.status-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.status-bar-right span {
+    padding-left: var(--space-lg);
+    border-left: 1px solid var(--border-color);
+}
+
+.status-bar-right span:first-child {
+    border-left: none;
+    padding-left: 0;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex 3D - 三维建模工具</title>
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/toolbar.css">
+    <link rel="stylesheet" href="src/css/panels.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/viewport.css">
+    <link rel="stylesheet" href="src/css/modal.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='16,2 28,10 28,22 16,30 4,22 4,10' fill='%234A9EFF' stroke='%23fff' stroke-width='1.5'/><polygon points='16,6 24,11 24,21 16,26 8,21 8,11' fill='%23222' stroke='%234A9EFF' stroke-width='0.8'/></svg>">
+</head>
+<body>
+    <!-- 顶部菜单栏 -->
+    <header id="menu-bar" class="menu-bar">
+        <div class="menu-bar-left">
+            <div class="app-logo" title="Vertex 3D">
+                <svg width="24" height="24" viewBox="0 0 32 32">
+                    <polygon points="16,2 28,10 28,22 16,30 4,22 4,10" fill="#4A9EFF" stroke="#fff" stroke-width="1.5"/>
+                    <polygon points="16,6 24,11 24,21 16,26 8,21 8,11" fill="#1a1a2e" stroke="#4A9EFF" stroke-width="0.8"/>
+                </svg>
+                <span>Vertex 3D</span>
+            </div>
+            <nav class="menu-items">
+                <button class="menu-btn" data-menu="file">文件</button>
+                <button class="menu-btn" data-menu="edit">编辑</button>
+                <button class="menu-btn" data-menu="add">添加</button>
+                <button class="menu-btn" data-menu="view">视图</button>
+                <button class="menu-btn" data-menu="help">帮助</button>
+            </nav>
+        </div>
+        <div class="menu-bar-center">
+            <div class="transform-mode-group">
+                <button class="mode-btn active" data-mode="translate" title="移动 (G)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1l3 3H9v3h3V5l3 3-3 3v-2H9v3h2l-3 3-3-3h2V9H4v2L1 8l3-3v2h3V4H5l3-3z" fill="currentColor"/></svg>
+                </button>
+                <button class="mode-btn" data-mode="rotate" title="旋转 (R)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1a7 7 0 0 1 6.9 5.8h-2.1A5 5 0 1 0 8 13a5 5 0 0 0 3.5-1.5l1.4 1.4A7 7 0 1 1 8 1zm4 0v5h-5l2.3-2.3A4 4 0 0 0 8 3" fill="currentColor"/></svg>
+                </button>
+                <button class="mode-btn" data-mode="scale" title="缩放 (S)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M1 1h5v2H4.4l3.3 3.3-1.4 1.4L3 4.4V6H1V1zm14 14h-5v-2h1.6l-3.3-3.3 1.4-1.4L13 11.6V10h2v5z" fill="currentColor"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="menu-bar-right">
+            <span class="status-text" id="status-text">就绪</span>
+        </div>
+    </header>
+
+    <!-- 下拉菜单容器 -->
+    <div id="dropdown-menus" class="dropdown-menus"></div>
+
+    <!-- 主体区域 -->
+    <main class="main-layout">
+        <!-- 左侧工具栏 -->
+        <aside id="toolbar-left" class="toolbar-left">
+            <div class="tool-section">
+                <span class="tool-section-label">选择</span>
+                <button class="tool-btn active" data-tool="select" title="选择工具 (W)">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 2l10 6-4 1 3 5-2 1-3-5-2 3z" fill="currentColor"/></svg>
+                </button>
+            </div>
+            <div class="tool-section">
+                <span class="tool-section-label">基础体</span>
+                <button class="tool-btn" data-tool="add-cube" title="添加立方体">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><rect x="3" y="3" width="12" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-sphere" title="添加球体">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="6" ry="2.5" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.5"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-cylinder" title="添加圆柱体">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><ellipse cx="9" cy="5" rx="5" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="5" x2="4" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="14" y1="5" x2="14" y2="13" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="13" rx="5" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-cone" title="添加圆锥体">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><polygon points="9,3 15,14 3,14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-torus" title="添加圆环体">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><ellipse cx="9" cy="9" rx="7" ry="4" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="9" cy="9" rx="3" ry="1.5" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-plane" title="添加平面">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><polygon points="2,12 9,6 16,12 9,15" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+            </div>
+            <div class="tool-section">
+                <span class="tool-section-label">光源</span>
+                <button class="tool-btn" data-tool="add-pointlight" title="添加点光源">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="3" fill="currentColor" opacity="0.6"/><line x1="9" y1="2" x2="9" y2="5" stroke="currentColor" stroke-width="1.2"/><line x1="9" y1="13" x2="9" y2="16" stroke="currentColor" stroke-width="1.2"/><line x1="2" y1="9" x2="5" y2="9" stroke="currentColor" stroke-width="1.2"/><line x1="13" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.2"/></svg>
+                </button>
+                <button class="tool-btn" data-tool="add-spotlight" title="添加聚光灯">
+                    <svg width="18" height="18" viewBox="0 0 18 18"><polygon points="7,3 11,3 14,14 4,14" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="9" y1="3" x2="9" y2="1" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 3D视口 -->
+        <section id="viewport-container" class="viewport-container">
+            <canvas id="viewport-canvas"></canvas>
+            <!-- 视口覆盖层信息 -->
+            <div class="viewport-overlay">
+                <div class="viewport-info-tl">
+                    <span id="viewport-mode">透视视图</span>
+                </div>
+                <div class="viewport-info-tr">
+                    <span id="viewport-fps">60 FPS</span>
+                </div>
+                <div class="viewport-info-bl">
+                    <span id="viewport-objects-count">对象: 0</span>
+                </div>
+                <div class="viewport-info-br">
+                    <div class="viewport-nav-cube" id="nav-cube" title="点击切换视图">
+                        <div class="nav-cube-face front">前</div>
+                        <div class="nav-cube-face back">后</div>
+                        <div class="nav-cube-face top">顶</div>
+                        <div class="nav-cube-face bottom">底</div>
+                        <div class="nav-cube-face left">左</div>
+                        <div class="nav-cube-face right">右</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 视口工具条 -->
+            <div class="viewport-toolbar">
+                <button class="vp-tool-btn" id="btn-perspective" title="透视/正交切换">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 12l4-8h4l4 8H2z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+                </button>
+                <button class="vp-tool-btn" id="btn-wireframe" title="线框模式">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2,1"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="0.8"/><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="0.8"/></svg>
+                </button>
+                <button class="vp-tool-btn" id="btn-grid-toggle" title="显示/隐藏网格">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><line x1="0" y1="4" x2="16" y2="4" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="12" x2="16" y2="12" stroke="currentColor" stroke-width="0.6"/><line x1="4" y1="0" x2="4" y2="16" stroke="currentColor" stroke-width="0.6"/><line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" stroke-width="0.6"/><line x1="12" y1="0" x2="12" y2="16" stroke="currentColor" stroke-width="0.6"/></svg>
+                </button>
+                <button class="vp-tool-btn" id="btn-snap" title="吸附开关">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="currentColor" opacity="0.3"/><rect x="9" y="9" width="6" height="6" fill="currentColor" opacity="0.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
+                </button>
+                <div class="vp-separator"></div>
+                <button class="vp-tool-btn" id="btn-focus" title="聚焦选中对象 (Numpad .)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- 右侧面板 -->
+        <aside id="panel-right" class="panel-right">
+            <!-- 场景大纲 -->
+            <div class="panel-section" id="outliner-panel">
+                <div class="panel-header" data-collapse="outliner">
+                    <svg class="panel-collapse-icon" width="10" height="10" viewBox="0 0 10 10"><path d="M2 3l3 4 3-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    <span>场景大纲</span>
+                    <div class="panel-header-actions">
+                        <button class="panel-action-btn" id="btn-add-object" title="添加对象">
+                            <svg width="12" height="12" viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body" id="outliner-body">
+                    <div class="outliner-empty">场景为空，请添加对象</div>
+                </div>
+            </div>
+
+            <!-- 属性面板 -->
+            <div class="panel-section" id="properties-panel">
+                <div class="panel-header" data-collapse="properties">
+                    <svg class="panel-collapse-icon" width="10" height="10" viewBox="0 0 10 10"><path d="M2 3l3 4 3-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    <span>属性</span>
+                </div>
+                <div class="panel-body" id="properties-body">
+                    <div class="properties-empty">未选中任何对象</div>
+                </div>
+            </div>
+
+            <!-- 材质面板 -->
+            <div class="panel-section" id="material-panel">
+                <div class="panel-header" data-collapse="material">
+                    <svg class="panel-collapse-icon" width="10" height="10" viewBox="0 0 10 10"><path d="M2 3l3 4 3-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    <span>材质</span>
+                </div>
+                <div class="panel-body" id="material-body">
+                    <div class="material-empty">未选中任何对象</div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- 底部状态栏 -->
+    <footer class="status-bar">
+        <div class="status-bar-left">
+            <span id="status-info">Vertex 3D v1.0</span>
+        </div>
+        <div class="status-bar-center">
+            <span id="status-transform"></span>
+        </div>
+        <div class="status-bar-right">
+            <span id="status-memory"></span>
+            <span id="status-renderer">WebGL 2.0</span>
+        </div>
+    </footer>
+
+    <!-- Toast 容器 -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modal 容器 -->
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+    <!-- 加载 Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+
+    <!-- 应用模块 -->
+    <script src="src/js/utils/Logger.js"></script>
+    <script src="src/js/utils/EventBus.js"></script>
+    <script src="src/js/ui/Toast.js"></script>
+    <script src="src/js/ui/Modal.js"></script>
+    <script src="src/js/ui/DropdownMenu.js"></script>
+    <script src="src/js/core/SceneManager.js"></script>
+    <script src="src/js/core/ObjectFactory.js"></script>
+    <script src="src/js/core/SelectionManager.js"></script>
+    <script src="src/js/core/TransformManager.js"></script>
+    <script src="src/js/core/HistoryManager.js"></script>
+    <script src="src/js/panels/OutlinerPanel.js"></script>
+    <script src="src/js/panels/PropertiesPanel.js"></script>
+    <script src="src/js/panels/MaterialPanel.js"></script>
+    <script src="src/js/io/SceneSerializer.js"></script>
+    <script src="src/js/io/ExportManager.js"></script>
+    <script src="src/js/App.js"></script>
+</body>
+</html>

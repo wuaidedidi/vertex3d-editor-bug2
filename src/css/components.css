@@ -1,0 +1,240 @@
+/* ========================================
+   UI Components - Toast, Buttons, etc.
+   ======================================== */
+
+/* Toast 通知 */
+.toast-container {
+    position: fixed;
+    top: calc(var(--menu-bar-height) + var(--space-lg));
+    right: var(--space-xl);
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    background: var(--bg-toast);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    pointer-events: auto;
+    animation: toastSlideIn 0.3s ease forwards;
+    max-width: 360px;
+    backdrop-filter: blur(8px);
+}
+
+.toast.removing {
+    animation: toastSlideOut 0.25s ease forwards;
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast.info { border-left: 3px solid var(--accent-primary); }
+.toast.success { border-left: 3px solid var(--text-success); }
+.toast.warning { border-left: 3px solid var(--text-warning); }
+.toast.error { border-left: 3px solid var(--text-error); }
+
+.toast.info .toast-icon { color: var(--accent-primary); }
+.toast.success .toast-icon { color: var(--text-success); }
+.toast.warning .toast-icon { color: var(--text-warning); }
+.toast.error .toast-icon { color: var(--text-error); }
+
+.toast-message {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.toast-close {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.toast-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+/* 下拉菜单 */
+.dropdown-menus {
+    position: fixed;
+    z-index: var(--z-dropdown);
+}
+
+.dropdown-menu {
+    position: absolute;
+    min-width: 200px;
+    background: var(--bg-dropdown);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-sm) 0;
+    animation: dropdownFadeIn 0.15s ease;
+}
+
+@keyframes dropdownFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-xl);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.dropdown-item.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.dropdown-item-shortcut {
+    color: var(--text-muted);
+    font-size: var(--font-size-xs);
+    margin-left: var(--space-2xl);
+    font-family: var(--font-mono);
+}
+
+.dropdown-separator {
+    height: 1px;
+    background: var(--border-color);
+    margin: var(--space-sm) 0;
+}
+
+/* 通用按钮 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+    background: var(--bg-hover);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-active);
+    color: var(--text-primary);
+}
+
+.btn-danger {
+    background: var(--text-error);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #FF6B6B;
+}
+
+.btn-sm {
+    padding: 2px var(--space-md);
+    font-size: var(--font-size-xs);
+}
+
+/* 上下文菜单 */
+.context-menu {
+    position: fixed;
+    min-width: 180px;
+    background: var(--bg-dropdown);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-sm) 0;
+    z-index: var(--z-dropdown);
+    animation: dropdownFadeIn 0.12s ease;
+}
+
+.context-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.context-menu-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.context-menu-item.danger:hover {
+    background: rgba(255, 82, 82, 0.15);
+    color: var(--text-error);
+}

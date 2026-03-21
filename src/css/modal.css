@@ -1,0 +1,170 @@
+/* ========================================
+   Modal Styles
+   ======================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalOverlayIn 0.2s ease;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+@keyframes modalOverlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    min-width: 400px;
+    max-width: 560px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideIn 0.25s ease;
+    z-index: var(--z-modal);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-2xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: var(--space-2xl);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-body p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-2xl);
+    border-top: 1px solid var(--border-color);
+}
+
+/* 快捷键列表 */
+.shortcut-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+}
+
+.shortcut-item-label {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.shortcut-item-keys {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 22px;
+    padding: 0 var(--space-md);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    box-shadow: 0 1px 0 var(--border-color);
+}
+
+/* 关于对话框 */
+.about-content {
+    text-align: center;
+}
+
+.about-logo {
+    margin-bottom: var(--space-xl);
+}
+
+.about-version {
+    font-size: var(--font-size-lg);
+    color: var(--text-accent);
+    margin-bottom: var(--space-md);
+}
+
+.about-desc {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+/* 确认对话框 */
+.confirm-message {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    text-align: center;
+    padding: var(--space-lg) 0;
+}

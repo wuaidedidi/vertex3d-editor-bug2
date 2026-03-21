@@ -1,0 +1,96 @@
+/* ========================================
+   CSS Variables - Design Tokens
+   ======================================== */
+:root {
+    /* 主色调 - Blender风格深色主题 */
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
+    --bg-panel: #1e1e3a;
+    --bg-panel-header: #252547;
+    --bg-input: #12122a;
+    --bg-hover: #2a2a5a;
+    --bg-active: #3a3a6a;
+    --bg-selected: #4A9EFF22;
+    --bg-viewport: #2a2a3e;
+    --bg-toolbar: #1a1a32;
+    --bg-menu: #222244;
+    --bg-dropdown: #1e1e3e;
+    --bg-toast: #2a2a4e;
+    --bg-modal: #1e1e3aee;
+
+    /* 文字颜色 */
+    --text-primary: #e0e0f0;
+    --text-secondary: #a0a0c0;
+    --text-muted: #6a6a8a;
+    --text-accent: #4A9EFF;
+    --text-warning: #FFB74D;
+    --text-error: #FF5252;
+    --text-success: #66BB6A;
+
+    /* 强调色 */
+    --accent-primary: #4A9EFF;
+    --accent-secondary: #7C4DFF;
+    --accent-hover: #6AB4FF;
+    --accent-active: #3A8EEF;
+    --accent-glow: #4A9EFF33;
+
+    /* 变换轴颜色 */
+    --axis-x: #FF4444;
+    --axis-y: #44CC44;
+    --axis-z: #4488FF;
+
+    /* 边框 */
+    --border-color: #2a2a4a;
+    --border-light: #3a3a5a;
+    --border-focus: #4A9EFF;
+
+    /* 阴影 */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 12px var(--accent-glow);
+
+    /* 圆角 */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+
+    /* 间距 */
+    --space-xs: 2px;
+    --space-sm: 4px;
+    --space-md: 8px;
+    --space-lg: 12px;
+    --space-xl: 16px;
+    --space-2xl: 24px;
+
+    /* 尺寸 */
+    --menu-bar-height: 36px;
+    --status-bar-height: 24px;
+    --toolbar-width: 48px;
+    --panel-width: 280px;
+
+    /* 过渡 */
+    --transition-fast: 0.12s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+
+    /* 字体 */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    --font-size-xs: 10px;
+    --font-size-sm: 11px;
+    --font-size-md: 12px;
+    --font-size-lg: 13px;
+    --font-size-xl: 14px;
+
+    /* z-index层级 */
+    --z-panel: 10;
+    --z-toolbar: 20;
+    --z-menu: 30;
+    --z-dropdown: 40;
+    --z-toast: 50;
+    --z-modal: 60;
+    --z-overlay: 55;
+}

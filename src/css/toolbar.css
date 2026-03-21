@@ -1,0 +1,76 @@
+/* ========================================
+   Toolbar Styles
+   ======================================== */
+.toolbar-left {
+    display: flex;
+    flex-direction: column;
+    width: var(--toolbar-width);
+    min-width: var(--toolbar-width);
+    background: var(--bg-toolbar);
+    border-right: 1px solid var(--border-color);
+    padding: var(--space-md) var(--space-sm);
+    gap: var(--space-md);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: var(--z-toolbar);
+}
+
+.tool-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tool-section:last-child {
+    border-bottom: none;
+}
+
+.tool-section-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-xs);
+    white-space: nowrap;
+}
+
+.tool-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.tool-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.tool-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    box-shadow: var(--shadow-glow);
+}
+
+.tool-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1.5px var(--accent-primary);
+}
+
+.tool-btn:focus-visible::after {
+    opacity: 1;
+}
