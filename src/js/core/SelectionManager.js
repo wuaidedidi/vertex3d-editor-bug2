@@ -88,7 +88,7 @@ const SelectionManager = (() => {
 
     function _removeHighlight(object) {
         if (object.material && !object.userData.isLight && object.material.emissive) {
-            object.material.emissive.setHex(object.userData._originalEmissive || 0xff6600);
+            object.material.emissive.setHex(object.userData._originalEmissive || 0);
         }
     }
 
