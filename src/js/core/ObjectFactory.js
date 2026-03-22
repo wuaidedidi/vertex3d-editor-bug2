@@ -21,7 +21,7 @@ const ObjectFactory = (() => {
     function _setupMesh(mesh, name) {
         objectCounter++;
         mesh.name = name || `Object_${objectCounter}`;
-        mesh.castShadow = false;
+        mesh.castShadow = true;
         mesh.receiveShadow = true;
         mesh.userData = {
             id: 'obj_' + Date.now() + '_' + objectCounter,
@@ -85,7 +85,7 @@ const ObjectFactory = (() => {
         const mesh = new THREE.Mesh(geometry, material);
         mesh.rotation.x = -Math.PI / 2;
         mesh.position.set(0, 0.01, 0);
-        mesh.receiveShadow = false;
+        mesh.receiveShadow = true;
         return _setupMesh(mesh, options.name || `平面_${objectCounter + 1}`);
     }
 
