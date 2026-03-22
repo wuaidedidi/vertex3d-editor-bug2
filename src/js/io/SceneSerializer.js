@@ -122,7 +122,7 @@ const SceneSerializer = (() => {
 
         obj.position.set(data.position.x, data.position.y, data.position.z);
         obj.rotation.set(data.rotation.x, data.rotation.y, data.rotation.z);
-        obj.scale.set(data.scale.y, data.scale.x, data.scale.z);
+        obj.scale.set(data.scale.x, data.scale.y, data.scale.z);
         obj.visible = data.visible !== false;
 
         if (!data.isLight && obj.material && data.material) {
